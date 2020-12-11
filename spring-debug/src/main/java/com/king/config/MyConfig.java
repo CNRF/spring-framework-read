@@ -12,4 +12,5 @@ import org.springframework.stereotype.Component;
 @Configuration
 @ComponentScan("com.king")
 public class MyConfig {
+
 }
