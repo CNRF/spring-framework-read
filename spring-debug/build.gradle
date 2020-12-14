@@ -29,6 +29,8 @@ dependencies {
     compile(project(":spring-test"))
     compile(project(":spring-webflux"))
     compile(project(":spring-websocket"))
+    implementation 'org.projectlombok:lombok:1.18.10'
+    annotationProcessor 'org.projectlombok:lombok:1.18.10'
 //    compile(project(":spring-aspects"))
 //    compile('org.springframework:spring-aspectj:5.2.9')
     compile("org.aspectj:aspectjweaver:1.9.6")
