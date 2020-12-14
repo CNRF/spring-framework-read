@@ -1,7 +1,6 @@
 package com.king;
 
-import com.king.entity.PersonA;
-import org.springframework.context.ApplicationContext;
+import com.king.entity.Person;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -12,18 +11,16 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class MyMainTest {
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean.xml");
-		/*
 		Person bean = applicationContext.getBean(Person.class);
 		System.out.println(bean);
-		 */
 
 		/*
 		AnnotationConfigApplicationContext acac = new AnnotationConfigApplicationContext(MyConfig.class);
 		acac.getBean(MyService.class).TestService();
 		*/
-		PersonA bean1 = applicationContext.getBean(PersonA.class);
+/*		PersonA bean1 = applicationContext.getBean(PersonA.class);
 		ApplicationContext applicationContext1 = bean1.getApplicationContext();
-		System.out.println(applicationContext1.toString());
+		System.out.println(applicationContext1.toString());*/
 
 	}
 }

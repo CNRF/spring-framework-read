@@ -1,16 +1,22 @@
 package com.king.entity;
 
-import lombok.Data;
 
 /**
  * @author wmx
  * @version 1.0
  * @date 2020/12/10 15:13
  */
-@Data
 public class Person {
 	private String name;
 	private int age;
+
+	public Person() {
+	}
+
+	public Person(String name, int age) {
+		this.name = name;
+		this.age = age;
+	}
 
 	@Override
 	public String toString() {
@@ -20,5 +26,19 @@ public class Person {
 				'}';
 	}
 
+	public String getName() {
+		return name;
+	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
 }
