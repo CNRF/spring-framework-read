@@ -51,6 +51,9 @@ import org.springframework.util.StringUtils;
  * @see org.springframework.expression.ExpressionParser
  * @see org.springframework.expression.spel.standard.SpelExpressionParser
  * @see org.springframework.expression.spel.support.StandardEvaluationContext
+ *
+ * 解释EL表达式
+ *
  */
 public class StandardBeanExpressionResolver implements BeanExpressionResolver {
 
