@@ -1,4 +1,4 @@
-package com.king;
+package com.king.Test;
 
 import com.king.entity.PersonA;
 import org.springframework.context.ApplicationContext;
@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @version 1.0
  * @date 2020/12/10 15:13
  */
-public class MyMainTest {
+public class Test01 {
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean.xml");
 /*		加载xml配置文件的第二种方式

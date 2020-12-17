@@ -523,17 +523,16 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			 *	（2）、设置活跃状态为ture
 			 *	（3）、设置关闭状态为false
 			 *	（4）、获取Environment对象，并加载当前系统的属性值到Environment对象中
-			 *	（5）、准备监听器和集合对象，此时默认为空的集合（此时在springMVC，springBoot中会赋值）
+			 *	（5）、准备监听器和集合对象，此时默认为空的集合（此时在springBoot中会赋值）
 			 * */
 			prepareRefresh();
 			// Tell the subclass to refresh the internal bean factory.
 			/*
 			 * 2、创建容器对象：DefaultListableBeanFactory
-			 *	（1）加载XML等配置文件的属性值到BeanFactory中，最重要的是BeanDefinition加载XML等配置文件的属性值到BeanFactory中，
-			 *		最重要的是BeanDefinition
+			 *	（1）加载XML等配置文件的属性值到BeanFactory中，
+			 * 		最重要的是BeanDefinition加载XML等配置文件的属性值到BeanFactory中，最重要的是BeanDefinition
 			 * */
 			ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
-
 			// Prepare the bean factory for use in this context.
 			/*
 			* 3、给当前的 beanFactory 设置属性值
@@ -543,7 +542,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 			try {
 				// Allows post-processing of the bean factory in context subclasses.
-				//3、 模版方法，给其他地方实现扩展功能
+				//3、 模版方法，给其他地方实现扩展功能，可以在springWeb中看到具体实现
 				postProcessBeanFactory(beanFactory);
 
 				// Invoke factory processors registered as beans in the context.
@@ -556,13 +555,14 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 				// Register bean processors that intercept bean creation.
 				/*
-				* 6、注册BeanPostProcessors
+				* 6、注册BeanPostProcessors，这里只是注册功能，真正调用的是getBean方法
 				* */
 				registerBeanPostProcessors(beanFactory);
 
 				// Initialize message source for this context.
 				/*
-				* 7、国结化（根据语言切换系统语言）
+				* 7、国结化（根据语言切换系统语言），在springMVC开发会用到
+				*
 				* */
 				initMessageSource();
 
@@ -580,15 +580,21 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				onRefresh();
 
 				// Check for listener beans and register them.
+				/*
+				* 10、在所有注册的bean中查找listener bean,注册到消息广播器中
+				* */
 				registerListeners();
 
 				// Instantiate all remaining (non-lazy-init) singletons.
 				/*
-				*
+				* 11、初始化剩下的单实例（非懒加载的）
 				* */
 				finishBeanFactoryInitialization(beanFactory);
 
 				// Last step: publish corresponding event.
+				/*
+				* 12、完成刷新过程，通知生命周期处理器lifecycleProcessor刷新过程，同时发出ContextRefreshEvent通知别人
+				* */
 				finishRefresh();
 			}
 
@@ -600,7 +606,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 				// Destroy already created singletons to avoid dangling resources.
 				/*
-				* 销毁对象
+				* 13、销毁对象
 				* */
 				destroyBeans();
 
@@ -644,28 +650,34 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		}
 
 		// Initialize any placeholder property sources in the context environment.
+		//模版方法，留给子类进行拓展工作
 		initPropertySources();
 
 		// Validate that all properties marked as required are resolvable:
 		// see ConfigurablePropertyResolver#setRequiredProperties
+		// 创建并获取环境对象，验证需要的环境属性是否已经放在环境中
 		getEnvironment().validateRequiredProperties();
 
 		// Store pre-refresh ApplicationListeners...
 		/*
-		* 初始化一些容器，给其他拓展使用（单纯的spring没有进行赋值）
+		* 判断刷新前的应用程序监听器集合是否为空，如果为空，则将监听器加到此集合中
+		* 初始化一些容器，给其他拓展使用（单纯的spring没有进行赋值，springBoot有进行相关拓展）
 		 * 在springMVC，springBoot中有初始化
-		* */
+		 *
+		 * */
 		if (this.earlyApplicationListeners == null) {
 			this.earlyApplicationListeners = new LinkedHashSet<>(this.applicationListeners);
 		}
 		else {
 			// Reset local application listeners to pre-refresh state.
+			//如果不为空则清空集合元素对象
 			this.applicationListeners.clear();
 			this.applicationListeners.addAll(this.earlyApplicationListeners);
 		}
 
 		// Allow for the collection of early ApplicationEvents,
 		// to be published once the multicaster is available...
+		//创建刷新前的监听事件集合
 		this.earlyApplicationEvents = new LinkedHashSet<>();
 	}
 
@@ -685,7 +697,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @see #getBeanFactory()
 	 */
 	protected ConfigurableListableBeanFactory obtainFreshBeanFactory() {
+		//初始化BeanFactory进行XML文件的读取工作，并将得到的BeanFactory记录当前的实体属性中
 		refreshBeanFactory();
+		//返回当前实体的beanFactory属性
 		return getBeanFactory();
 	}
 

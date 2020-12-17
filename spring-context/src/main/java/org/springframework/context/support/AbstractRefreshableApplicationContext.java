@@ -119,7 +119,7 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 	 */
 	@Override
 	protected final void refreshBeanFactory() throws BeansException {
-		//判断是否存在BeanFactory
+		//判断是否存在BeanFactory，有则销毁BeanFactory
 		if (hasBeanFactory()) {
 			//销毁Beans
 			destroyBeans();
@@ -127,13 +127,13 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 			closeBeanFactory();
 		}
 		try {
-			//创建BeanFactory
+			//创建DefaultListableBeanFactory对象
 			DefaultListableBeanFactory beanFactory = createBeanFactory();
-			//设置序列化的id
+			//设置序列化的id，可以从id反序列化到BeanFactory对象
 			beanFactory.setSerializationId(getId());
-			//定制Bean工厂，设置相关属性值
+			//定制Bean工厂，设置相关属性值，包括是否运行覆盖通名称的不同定义的对象以及循环依赖
 			customizeBeanFactory(beanFactory);
-			//加载Bean属性（加载配置文件）
+			//初始化documentReader,进行XML文件的读取及解析
 			loadBeanDefinitions(beanFactory);
 			this.beanFactory = beanFactory;
 		}
