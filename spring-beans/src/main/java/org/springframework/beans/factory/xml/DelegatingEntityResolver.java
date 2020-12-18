@@ -60,6 +60,7 @@ public class DelegatingEntityResolver implements EntityResolver {
 	 */
 	public DelegatingEntityResolver(@Nullable ClassLoader classLoader) {
 		this.dtdResolver = new BeansDtdResolver();
+		//在debug时，idea会自动调用toString方法，会导致无法找到文件在哪里加载问题
 		this.schemaResolver = new PluggableSchemaResolver(classLoader);
 	}
 

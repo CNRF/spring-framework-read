@@ -303,11 +303,14 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 	 * and registering it with the registry.
 	 */
 	protected void processBeanDefinition(Element ele, BeanDefinitionParserDelegate delegate) {
+		//beanDefinitionHolder是BeanDefinition对象的封装类，封装了BeanDefinition，bean的名字和别名
+		//得到这个BeanDefinitionHolder就意味着BeanDefinition是用过beanDefinitionParseDelegate对XML元素的信息按照spring的规则进行
 		BeanDefinitionHolder bdHolder = delegate.parseBeanDefinitionElement(ele);
 		if (bdHolder != null) {
 			bdHolder = delegate.decorateBeanDefinitionIfRequired(ele, bdHolder);
 			try {
 				// Register the final decorated instance.
+				//向IOC容器中出差解析得到BeanDefinition的地方
 				BeanDefinitionReaderUtils.registerBeanDefinition(bdHolder, getReaderContext().getRegistry());
 			}
 			catch (BeanDefinitionStoreException ex) {

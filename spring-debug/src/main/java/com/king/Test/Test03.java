@@ -1,7 +1,9 @@
 package com.king.Test;
 
 import com.king.MyClassPathXmlApplicationContext;
+import com.king.config.MyConfig;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -12,7 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Test03 {
 	public static void main(String[] args) {
-		ClassPathXmlApplicationContext applicationContext = new MyClassPathXmlApplicationContext("bean.xml");
 
+		ClassPathXmlApplicationContext applicationContext = new MyClassPathXmlApplicationContext("bean.xml");
 	}
 }

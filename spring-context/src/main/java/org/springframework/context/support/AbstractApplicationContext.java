@@ -528,7 +528,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			prepareRefresh();
 			// Tell the subclass to refresh the internal bean factory.
 			/*
-			 * 2、创建容器对象：DefaultListableBeanFactory
+			 * 2、创建容器对象：DefaultListableBeanFactory（重要）
 			 *	（1）加载XML等配置文件的属性值到BeanFactory中，
 			 * 		最重要的是BeanDefinition加载XML等配置文件的属性值到BeanFactory中，最重要的是BeanDefinition
 			 * */
