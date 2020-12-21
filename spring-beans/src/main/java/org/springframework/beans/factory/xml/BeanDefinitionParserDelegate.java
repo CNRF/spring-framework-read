@@ -412,9 +412,9 @@ public class BeanDefinitionParserDelegate {
 	 */
 	@Nullable
 	public BeanDefinitionHolder parseBeanDefinitionElement(Element ele, @Nullable BeanDefinition containingBean) {
-		//解析id熟悉
+		//解析id属性
 		String id = ele.getAttribute(ID_ATTRIBUTE);
-		//解析name熟悉
+		//解析name属性
 		String nameAttr = ele.getAttribute(NAME_ATTRIBUTE);
 		//如果bean有别名的话，还需要将别名进行分割解析
 		List<String> aliases = new ArrayList<>();
@@ -435,7 +435,7 @@ public class BeanDefinitionParserDelegate {
 		if (containingBean == null) {
 			checkNameUniqueness(beanName, aliases, ele);
 		}
-		//对bean元素的进行详细解析（类似abstarct等）
+		//对bean元素的进行详细解析（类似Abstract，lazyinit等属性）
 		AbstractBeanDefinition beanDefinition = parseBeanDefinitionElement(ele, beanName, containingBean);
 		if (beanDefinition != null) {
 			if (!StringUtils.hasText(beanName)) {
@@ -782,10 +782,14 @@ public class BeanDefinitionParserDelegate {
 
 	/**
 	 * Parse a constructor-arg element.
+	 * 解决设置index，type，name同时存在的时候，那个属性值起作用
 	 */
 	public void parseConstructorArgElement(Element ele, BeanDefinition bd) {
+		//解析index属性
 		String indexAttr = ele.getAttribute(INDEX_ATTRIBUTE);
+		//解析type属性
 		String typeAttr = ele.getAttribute(TYPE_ATTRIBUTE);
+		//解析name属性
 		String nameAttr = ele.getAttribute(NAME_ATTRIBUTE);
 		if (StringUtils.hasLength(indexAttr)) {
 			try {
@@ -920,6 +924,7 @@ public class BeanDefinitionParserDelegate {
 				"<constructor-arg> element");
 
 		// Should only have one child element: ref, value, list, etc.
+		//一个属性只能对应一种类型 ref, value, list, etc等
 		NodeList nl = ele.getChildNodes();
 		Element subElement = null;
 		for (int i = 0; i < nl.getLength(); i++) {
@@ -1423,6 +1428,7 @@ public class BeanDefinitionParserDelegate {
 
 		// Decorate based on custom attributes first.
 		NamedNodeMap attributes = ele.getAttributes();
+		//遍历所有的属性，看是否有适用于装饰的属性
 		for (int i = 0; i < attributes.getLength(); i++) {
 			Node node = attributes.item(i);
 			finalDefinition = decorateIfRequired(node, finalDefinition, containingBd);
@@ -1430,6 +1436,7 @@ public class BeanDefinitionParserDelegate {
 
 		// Decorate based on custom nested elements.
 		NodeList children = ele.getChildNodes();
+		//遍历所有的子节点，看是否有适用于装饰的子元素
 		for (int i = 0; i < children.getLength(); i++) {
 			Node node = children.item(i);
 			if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -1449,14 +1456,18 @@ public class BeanDefinitionParserDelegate {
 	 */
 	public BeanDefinitionHolder decorateIfRequired(
 			Node node, BeanDefinitionHolder originalDef, @Nullable BeanDefinition containingBd) {
-
+		//获取自定义的标签的命名空间
 		String namespaceUri = getNamespaceURI(node);
+		//对非默认的标签进行修饰
 		if (namespaceUri != null && !isDefaultNamespace(namespaceUri)) {
+			//根据命名空间找到对应的处理器
 			NamespaceHandler handler = this.readerContext.getNamespaceHandlerResolver().resolve(namespaceUri);
 			if (handler != null) {
+				//进行修饰
 				BeanDefinitionHolder decorated =
 						handler.decorate(node, originalDef, new ParserContext(this.readerContext, this, containingBd));
 				if (decorated != null) {
+
 					return decorated;
 				}
 			}
