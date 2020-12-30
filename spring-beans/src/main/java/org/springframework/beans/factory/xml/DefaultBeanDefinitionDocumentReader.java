@@ -177,6 +177,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 						parseDefaultElement(ele, delegate);
 					}
 					else {
+						//对自定义的命名空间进行相关解析
 						delegate.parseCustomElement(ele);
 					}
 				}
