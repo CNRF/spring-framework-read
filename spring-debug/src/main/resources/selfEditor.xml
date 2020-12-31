@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean id="customer" class="com.king.selfEditor.Customer">
+	<property name="name" value="张三"></property>
+	<property name="address" value="湖北省_黄冈市_武穴市"></property>
+ </bean>
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="propertyEditorRegistrars">
+			<list>
+				<bean class="com.king.selfEditor.CustomerPropertyEditorRegistrar"></bean>
+			</list>
+		</property>
+	</bean>
+</beans>

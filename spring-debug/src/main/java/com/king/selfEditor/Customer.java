@@ -8,22 +8,9 @@ package com.king.selfEditor;
  */
 public class Customer {
 	private String name;
-	private int age;
-
-	public Customer(String name, int age) {
-		this.name = name;
-		this.age = age;
-	}
+	private Address address;
 
 	public Customer() {
-	}
-
-	@Override
-	public String toString() {
-		return "Custom{" +
-				"name='" + name + '\'' +
-				", age=" + age +
-				'}';
 	}
 
 	public String getName() {
@@ -34,11 +21,24 @@ public class Customer {
 		this.name = name;
 	}
 
-	public int getAge() {
-		return age;
+	public Address getAddress() {
+		return address;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public Customer(String name, Address address) {
+		this.name = name;
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer{" +
+				"name='" + name + '\'' +
+				", address=" + address +
+				'}';
 	}
 }

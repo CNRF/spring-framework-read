@@ -139,7 +139,11 @@ public class CustomEditorConfigurer implements BeanFactoryPostProcessor, Ordered
 		this.customEditors = customEditors;
 	}
 
-
+	/**
+	 *	在此处进行相关的自定义解析器的注册工作
+	 * @param beanFactory the bean factory used by the application context
+	 * @throws BeansException
+	 */
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 		if (this.propertyEditorRegistrars != null) {

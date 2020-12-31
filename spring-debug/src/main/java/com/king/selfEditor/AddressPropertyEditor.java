@@ -8,8 +8,14 @@ import java.beans.PropertyEditorSupport;
  * @date 2020/12/25 16:30
  * @Description
  */
-public class CustmerPropertyEditor extends PropertyEditorSupport {
+public class AddressPropertyEditor extends PropertyEditorSupport {
 	@Override
 	public void setAsText(String text) throws IllegalArgumentException {
+		String[] s = text.split("_");
+		Address address = new Address();
+		address.setProvinces(s[0]);
+		address.setCity(s[1]);
+		address.setTown(s[2]);
+		setValue(address);
 	}
 }

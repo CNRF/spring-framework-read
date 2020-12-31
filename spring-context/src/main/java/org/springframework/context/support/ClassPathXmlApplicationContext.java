@@ -140,6 +140,7 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
 
 		super(parent);
 		//设置传递的configLocations（文件名称）
+		//在此过程中判断Environment为空的情况会调用createEnvironment()方法获取相关环境数据
 		setConfigLocations(configLocations);
 		if (refresh) {
 			refresh();
