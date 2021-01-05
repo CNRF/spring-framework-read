@@ -13,7 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Test04 {
 	public static void main(String[] args) {
 
-		ClassPathXmlApplicationContext applicationContext = new MyClassPathXmlApplicationContext("selfEditor.xml");
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("selfEditor.xml");
 		Customer bean = applicationContext.getBean(Customer.class);
 		System.out.println(bean);
 	}

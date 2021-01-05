@@ -549,7 +549,6 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				/*
 				*5、实例化并调用所有注册的BeanFactoryPostProcessor Bean，并遵循显式顺序（如果给定的话）。
 				* 	必须在单例实例化之前调用
-				*
 				* */
 				invokeBeanFactoryPostProcessors(beanFactory);
 
@@ -723,7 +722,14 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		* 设置忽略Aware接口,在bean实例化之后再进行Aware接口的实现
 		*
 		* */
+		//添加beanPostProcessor
 		beanFactory.addBeanPostProcessor(new ApplicationContextAwareProcessor(this));
+		/*
+		* @see ApplicationContextAwareProcessor   invokeAwareInterfaces
+		* 忽略的6个Aware方法会在invokeAwareInterfaces中进行相关实现
+		 * 在此进行忽略是因为这些接口的实现由容器通过set方法进行注入
+		 * @autowire接口需要set方法，故需要set方法实现，不再beanFactory方法中实现
+		* */
 		beanFactory.ignoreDependencyInterface(EnvironmentAware.class);
 		beanFactory.ignoreDependencyInterface(EmbeddedValueResolverAware.class);
 		beanFactory.ignoreDependencyInterface(ResourceLoaderAware.class);
@@ -733,15 +739,31 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 		// BeanFactory interface not registered as resolvable type in a plain factory.
 		// MessageSource registered (and found for autowiring) as a bean.
+		/*
+		*
+		* 设置几个自动装配的特殊规则，当进行ioc初始化时有多个实现，那么久使用指定的对象进行相关注入
+		* 设置相关注入优先级
+		* */
 		beanFactory.registerResolvableDependency(BeanFactory.class, beanFactory);
 		beanFactory.registerResolvableDependency(ResourceLoader.class, this);
 		beanFactory.registerResolvableDependency(ApplicationEventPublisher.class, this);
 		beanFactory.registerResolvableDependency(ApplicationContext.class, this);
 
 		// Register early post-processor for detecting inner beans as ApplicationListeners.
+		//注册BPP
 		beanFactory.addBeanPostProcessor(new ApplicationListenerDetector(this));
 
 		// Detect a LoadTimeWeaver and prepare for weaving, if found.
+		/*
+		* 增加对AspectJ的支持 在java中织入分为三种方式:1 编译器植入 2 类加载器织入 3 运行期织入
+		* 1 编译器织入（静态代理）：采用特殊的编译器，把切面织入到类中
+		* 2.类加载器织入（静态代理）：通过特殊的类加载器，在字节码加载到JVM时，织入切面
+		* 3.运行期织入（动态代理）：  jdk动态代理（基于接口来实现）、CGlib（基于类实现）。
+		*
+		* AspectJ提供两种织入方式: 1 通过特殊的编译器，在编译期将AspectJ语言编写的切面类织入到java类中
+		* 						  2. 类加载器织入，就是下面的LoadTimeWeaver方式
+		* AOP相关准备工作
+		* */
 		if (beanFactory.containsBean(LOAD_TIME_WEAVER_BEAN_NAME)) {
 			beanFactory.addBeanPostProcessor(new LoadTimeWeaverAwareProcessor(beanFactory));
 			// Set a temporary ClassLoader for type matching.
@@ -749,6 +771,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		}
 
 		// Register default environment beans.
+		//注册默认的系统环境bean到一级缓存中去
 		if (!beanFactory.containsLocalBean(ENVIRONMENT_BEAN_NAME)) {
 			beanFactory.registerSingleton(ENVIRONMENT_BEAN_NAME, getEnvironment());
 		}
@@ -774,8 +797,13 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * Instantiate and invoke all registered BeanFactoryPostProcessor beans,
 	 * respecting explicit order if given.
 	 * <p>Must be called before singleton instantiation.
+	 * 实例化并且调用已经注册的BeanFactoryPostProcessor，遵循调用的顺序
 	 */
 	protected void invokeBeanFactoryPostProcessors(ConfigurableListableBeanFactory beanFactory) {
+		/*
+		* 获取当前应用中上下文的beanFactoryPostProcessors变量的值，并且实例化调用执行所有已经注册的beanFactoryPostProcessor
+		* 默认情况下，可以通过getBeanFactoryPostProcessors()来获取已经注册的BFPP
+		* */
 		PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, getBeanFactoryPostProcessors());
 
 		// Detect a LoadTimeWeaver and prepare for weaving, if found in the meantime

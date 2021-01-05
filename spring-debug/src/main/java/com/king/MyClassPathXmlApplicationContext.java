@@ -1,5 +1,6 @@
 package com.king;
 
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -23,5 +24,10 @@ public class MyClassPathXmlApplicationContext  extends ClassPathXmlApplicationCo
 	}
 	public MyClassPathXmlApplicationContext(String... configLocations){
 		super(configLocations);
+	}
+
+	@Override
+	protected void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
+		System.out.println("扩展实现beanProcessorFactory方法");
 	}
 }
