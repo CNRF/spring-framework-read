@@ -22,5 +22,6 @@ public class Teacher {
 	}
 
 	public Teacher() {
+		System.out.println("创建Teacher对象");
 	}
 }
