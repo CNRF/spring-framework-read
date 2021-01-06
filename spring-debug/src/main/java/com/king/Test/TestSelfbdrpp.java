@@ -1,6 +1,5 @@
 package com.king.Test;
 
-import com.king.selfEditor.Customer;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -12,7 +11,5 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class TestSelfbdrpp {
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("selfBeanPostRegistryProcessor.xml");
-//		Customer bean = applicationContext.getBean(Customer.class);
-//		System.out.println(bean);
 	}
 }
