@@ -4,6 +4,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
+import org.springframework.beans.factory.support.RootBeanDefinition;
 
 /**
  * @author wmx
@@ -20,5 +21,8 @@ public class MyBeanDefinitionPostProcessor  implements BeanDefinitionRegistryPos
 	@Override
 	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
 		System.out.println("执行postProcessBeanDefinitionRegistry方法------MyBeanDefinitionPostProcessor");
+		registry.registerBeanDefinition("wmx",new RootBeanDefinition(Teacher.class));
+
+
 	}
 }
