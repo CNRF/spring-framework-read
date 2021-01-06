@@ -12,7 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @date 2020/12/16 11:06
  * @Description 实现自定义 ClassPathXmlApplicationContext
  */
-public class Test03 {
+public class TestSelfApplicationContext {
 	public static void main(String[] args) {
 
 		ClassPathXmlApplicationContext applicationContext = new MyClassPathXmlApplicationContext("bean.xml");

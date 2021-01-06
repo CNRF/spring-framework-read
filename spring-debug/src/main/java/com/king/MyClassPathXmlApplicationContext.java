@@ -1,5 +1,6 @@
 package com.king;
 
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -29,5 +30,13 @@ public class MyClassPathXmlApplicationContext  extends ClassPathXmlApplicationCo
 	@Override
 	protected void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
 		System.out.println("扩展实现beanProcessorFactory方法");
+	}
+
+	@Override
+	public void addBeanFactoryPostProcessor(BeanFactoryPostProcessor postProcessor) {
+		super.addBeanFactoryPostProcessor(postProcessor);
+//		实现自定义的BeanPostProcessor方式一
+		//方式二:在XML中将BeanPostProcessor注册为bean，详见bean.xml文件
+		super.addBeanFactoryPostProcessor(new MyBeanPostProcessor());
 	}
 }

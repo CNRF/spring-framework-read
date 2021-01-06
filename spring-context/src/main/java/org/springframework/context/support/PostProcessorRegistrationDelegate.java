@@ -76,13 +76,14 @@ final class PostProcessorRegistrationDelegate {
 
 			/*
 			* 首先处理BeanFactoryPostProcessor，遍历所有的BeanFactoryPostProcessors
-			* 将 BeanDefinitionRegistryPostProcessor 和BeanFactoryPostProcessor区分开
+			* 将 BeanDefinitionRegistryPostProcessor 和BeanFactoryPostProcessor  区分开
 			* */
 			for (BeanFactoryPostProcessor postProcessor : beanFactoryPostProcessors) {
 				if (postProcessor instanceof BeanDefinitionRegistryPostProcessor) {
 					BeanDefinitionRegistryPostProcessor registryProcessor =
 							(BeanDefinitionRegistryPostProcessor) postProcessor;
 					//直接执行BeanDefinitionRegistryPostProcessor接口中的postProcessBeanDefinitionRegistry方法
+					//在此过程中可能会添加新的postProcessBeanFactory，故后面会有重复代码
 					registryProcessor.postProcessBeanDefinitionRegistry(registry);
 					registryProcessors.add(registryProcessor);
 				}
@@ -104,7 +105,7 @@ final class PostProcessorRegistrationDelegate {
 			//找到所有实现BeanDefinitionRegistryPostProcessor 接口的bean的beanName
 			String[] postProcessorNames =
 					beanFactory.getBeanNamesForType(BeanDefinitionRegistryPostProcessor.class, true, false);
-			//遍历处理所有的复核规则的postProcessorNames
+			//遍历处理所有的符合规则的postProcessorNames
 			for (String ppName : postProcessorNames) {
 				//检测是否实现PriorityOrdered接口
 				if (beanFactory.isTypeMatch(ppName, PriorityOrdered.class)) {

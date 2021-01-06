@@ -8,9 +8,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author wmx
  * @version 1.0
  * @date 2020/12/16 11:06
- * @Description 实现自定义接卸器
+ * @Description 实现自定义解析器
  */
-public class Test04 {
+public class TestSelfEditor {
 	public static void main(String[] args) {
 
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("selfEditor.xml");

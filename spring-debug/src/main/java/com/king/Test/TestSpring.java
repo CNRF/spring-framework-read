@@ -11,7 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @version 1.0
  * @date 2020/12/10 15:13
  */
-public class Test01 {
+public class TestSpring {
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean.xml");
 	/*	加载xml配置文件的第二种方式

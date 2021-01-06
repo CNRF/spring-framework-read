@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @date 2020/12/16 11:06
  * @Description
  */
-public class Test02 {
+public class TestEnvironment {
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-${username}.xml");
 		AutowireCapableBeanFactory beanFactory = applicationContext.getAutowireCapableBeanFactory();

@@ -724,11 +724,11 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		* */
 		//添加beanPostProcessor
 		beanFactory.addBeanPostProcessor(new ApplicationContextAwareProcessor(this));
-		/*
-		* @see ApplicationContextAwareProcessor   invokeAwareInterfaces
+		/**
+		* @see ApplicationContextAwareProcessor#invokeAwareInterfaces
 		* 忽略的6个Aware方法会在invokeAwareInterfaces中进行相关实现
 		 * 在此进行忽略是因为这些接口的实现由容器通过set方法进行注入
-		 * @autowire接口需要set方法，故需要set方法实现，不再beanFactory方法中实现
+		 *  @autowire 接口需要set方法，故需要set方法实现，不再beanFactory方法中实现
 		* */
 		beanFactory.ignoreDependencyInterface(EnvironmentAware.class);
 		beanFactory.ignoreDependencyInterface(EmbeddedValueResolverAware.class);
@@ -741,7 +741,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		// MessageSource registered (and found for autowiring) as a bean.
 		/*
 		*
-		* 设置几个自动装配的特殊规则，当进行ioc初始化时有多个实现，那么久使用指定的对象进行相关注入
+		* 设置几个自动装配的特殊规则，当进行ioc初始化时有多个实现，那么就使用指定的对象进行相关注入
 		* 设置相关注入优先级
 		* */
 		beanFactory.registerResolvableDependency(BeanFactory.class, beanFactory);
