@@ -11,5 +11,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class TestSelfbdrpp {
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("selfBeanPostRegistryProcessor.xml");
+
 	}
 }

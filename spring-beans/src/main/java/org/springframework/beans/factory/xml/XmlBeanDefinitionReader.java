@@ -329,7 +329,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 			throw new BeanDefinitionStoreException(
 					"Detected cyclic loading of " + encodedResource + " - check your import definitions!");
 		}
-		//从encodedResource中获取已经封装的Resource队形并再次从Resource中获取其中的InputStream
+		//从encodedResource中获取已经封装的Resource对象并再次从Resource中获取其中的InputStream
 		try (InputStream inputStream = encodedResource.getResource().getInputStream()) {
 			InputSource inputSource = new InputSource(inputStream);
 			if (encodedResource.getEncoding() != null) {
@@ -390,7 +390,7 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 		try {
 			//从此处获取XML文件中的Document对象，这个解析过程是有documentLoader完成
 			/*解析的过程
-			* 从String[]---String---Resource[]----resouce,最终开始讲resource读取成一个documen文档，
+			* 从String[]---String---Resource[]----resource,最终开始讲resource读取成一个document文档，
 			* 根据文档的节点信息封装成一个个的BeanDefinition的对象
 			 *
 			* */
