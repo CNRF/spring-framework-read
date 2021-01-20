@@ -1,7 +1,5 @@
-package com.king.Test;
+package com.king.selfEditor;
 
-import com.king.MyClassPathXmlApplicationContext;
-import com.king.selfEditor.Customer;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**

@@ -1,4 +1,4 @@
-package com.king;
+package com.king.config;
 
 import com.king.entity.Person;
 import org.springframework.beans.BeansException;

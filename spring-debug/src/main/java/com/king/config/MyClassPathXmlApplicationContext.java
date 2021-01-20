@@ -1,4 +1,4 @@
-package com.king;
+package com.king.config;
 
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;

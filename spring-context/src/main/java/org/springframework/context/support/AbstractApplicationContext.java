@@ -610,6 +610,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				destroyBeans();
 
 				// Reset 'active' flag.
+				//重新设置标志位状态
 				cancelRefresh(ex);
 
 				// Propagate exception to caller.

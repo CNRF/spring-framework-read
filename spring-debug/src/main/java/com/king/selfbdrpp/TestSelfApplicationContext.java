@@ -1,9 +1,6 @@
-package com.king.Test;
+package com.king.selfbdrpp;
 
-import com.king.MyClassPathXmlApplicationContext;
-import com.king.config.MyConfig;
-import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import com.king.config.MyClassPathXmlApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**

@@ -1,4 +1,4 @@
-package com.king.Test;
+package com.king.selfbdrpp;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
