@@ -259,21 +259,29 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 	}
 
 	/**
+	 * SpringBoot的装配原理主要就是此类实现
+	 *
 	 * Build and validate a configuration model based on the registry of
 	 * {@link Configuration} classes.
+	 * 解析常见的注解（@Component等）
 	 */
 	public void processConfigBeanDefinitions(BeanDefinitionRegistry registry) {
+		//创建存放BeanDefinitionHolder的对象集合
 		List<BeanDefinitionHolder> configCandidates = new ArrayList<>();
+		//对当前registry就是DefaultListableBeanFactory，获取所有已经注册的BeanDefinition的baneName
 		String[] candidateNames = registry.getBeanDefinitionNames();
-
+		//遍历所有要处理的BeanDefinition的名称
 		for (String beanName : candidateNames) {
+			//获取指定名称的BeanDefinition对象
 			BeanDefinition beanDef = registry.getBeanDefinition(beanName);
 			if (beanDef.getAttribute(ConfigurationClassUtils.CONFIGURATION_CLASS_ATTRIBUTE) != null) {
 				if (logger.isDebugEnabled()) {
 					logger.debug("Bean definition has already been processed as a configuration class: " + beanDef);
 				}
 			}
+			//判断当前BeanDefinition是否添加@Configuration注解或者其他@Bean等注解
 			else if (ConfigurationClassUtils.checkConfigurationClassCandidate(beanDef, this.metadataReaderFactory)) {
+				//添加到对应的集合对象中去
 				configCandidates.add(new BeanDefinitionHolder(beanDef, beanName));
 			}
 		}
@@ -309,6 +317,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 		}
 
 		// Parse each @Configuration class
+		//实例化ConfigurationClassParser类，并初始化相关参数，完成配置类的相关解析工作
 		ConfigurationClassParser parser = new ConfigurationClassParser(
 				this.metadataReaderFactory, this.problemReporter, this.environment,
 				this.resourceLoader, this.componentScanBeanNameGenerator, registry);

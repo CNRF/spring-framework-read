@@ -180,18 +180,23 @@ final class PostProcessorRegistrationDelegate {
 		/*
 		 *	到此为止，入参beanFactoryProcessors和容器中所有的BeanDefinitionRegistryPostProcessor已经全部处理完成
 		 * 现在开始处理BeanFactoryPostProcessor
-		 * 这里可能存在一部分只实现了BeanFactoryPostProcessor没有实现BeanDefinitionRegistryPostProcessor接口的类
+		 * 这里可能存在一部分只实现了BeanFactoryPostProcessor,没有实现BeanDefinitionRegistryPostProcessor接口的类
 		 */
 		String[] postProcessorNames =
 				beanFactory.getBeanNamesForType(BeanFactoryPostProcessor.class, true, false);
 
 		// Separate between BeanFactoryPostProcessors that implement PriorityOrdered,
 		// Ordered, and the rest.
+		//用于存放实现了priorityOrdered接口的beanName集合
 		List<BeanFactoryPostProcessor> priorityOrderedPostProcessors = new ArrayList<>();
+		//用于存放实现了ordered接口的BeanFactoryProcessor的beanName
 		List<String> orderedPostProcessorNames = new ArrayList<>();
+		//存放普通的BeanFactoryProcessor的beanName
 		List<String> nonOrderedPostProcessorNames = new ArrayList<>();
+		//遍历postProcessorNames，将三种不同集合区分开
 		for (String ppName : postProcessorNames) {
 			if (processedBeans.contains(ppName)) {
+				//已经执行过的BeanFactoryPostProcessor不再执行
 				// skip - already processed in first phase above
 			}
 			else if (beanFactory.isTypeMatch(ppName, PriorityOrdered.class)) {
@@ -206,8 +211,9 @@ final class PostProcessorRegistrationDelegate {
 		}
 
 		// First, invoke the BeanFactoryPostProcessors that implement PriorityOrdered.
-		//重新进行排序
+		//对实现priorityOrdered接口的BeanFactoryPostProcessor进行排序
 		sortPostProcessors(priorityOrderedPostProcessors, beanFactory);
+		//对实现priorityOrdered接口的BeanFactoryPostProcessor执行PostProcessorBeanFactory方法
 		invokeBeanFactoryPostProcessors(priorityOrderedPostProcessors, beanFactory);
 
 		// Next, invoke the BeanFactoryPostProcessors that implement Ordered.
@@ -215,7 +221,9 @@ final class PostProcessorRegistrationDelegate {
 		for (String postProcessorName : orderedPostProcessorNames) {
 			orderedPostProcessors.add(beanFactory.getBean(postProcessorName, BeanFactoryPostProcessor.class));
 		}
+		//对实现ordered接口的BeanFactoryPostProcessor进行排序操作
 		sortPostProcessors(orderedPostProcessors, beanFactory);
+		//遍历实现了ordered接口的BeanFactoryPostProcessor，执行PostProcessorBeanFactory方法
 		invokeBeanFactoryPostProcessors(orderedPostProcessors, beanFactory);
 
 		// Finally, invoke all other BeanFactoryPostProcessors.

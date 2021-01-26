@@ -13,7 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class TestSpring {
 	public static void main(String[] args) {
-		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean.xml");
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean.xml");
 	/*	加载xml配置文件的第二种方式
 		ClassPathResource classPathResource = new ClassPathResource("bean.xml");
 		XmlBeanFactory xmlBeanFactory = new XmlBeanFactory(classPathResource );*/
