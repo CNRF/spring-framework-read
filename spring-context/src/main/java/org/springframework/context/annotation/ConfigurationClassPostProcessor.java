@@ -82,6 +82,12 @@ import org.springframework.util.ClassUtils;
  * @author Juergen Hoeller
  * @author Phillip Webb
  * @since 3.0
+ *
+ * 此类是一个后置处理类，主要功能是参与BeanFactory的建造，主要功能如下
+ * 1. 解析@Configuration的配置类
+ * 2. 解析@ComponentScan扫描的包
+ * 3. 解析@ComponentScans扫描的包
+ * 4. 解析@Import注解
  */
 public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPostProcessor,
 		PriorityOrdered, ResourceLoaderAware, BeanClassLoaderAware, EnvironmentAware {
@@ -222,6 +228,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 	 */
 	@Override
 	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) {
+		//根据对应的registry对象生成hashcode值，此对象只会操作一次，如果之前处理过就抛出异常
 		int registryId = System.identityHashCode(registry);
 		if (this.registriesPostProcessed.contains(registryId)) {
 			throw new IllegalStateException(
@@ -231,8 +238,9 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 			throw new IllegalStateException(
 					"postProcessBeanFactory already called on this post-processor against " + registry);
 		}
+		//将id添加到马上要处理的registry对象放到集合中
 		this.registriesPostProcessed.add(registryId);
-
+		//处理配置类的bean的定义信息，核心处理环节
 		processConfigBeanDefinitions(registry);
 	}
 
@@ -263,14 +271,14 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 	 *
 	 * Build and validate a configuration model based on the registry of
 	 * {@link Configuration} classes.
-	 * 解析常见的注解（@Component等）
+	 * 解析常见的注解（@Component，@Configuration，@ComponentScans等）
 	 */
 	public void processConfigBeanDefinitions(BeanDefinitionRegistry registry) {
 		//创建存放BeanDefinitionHolder的对象集合
 		List<BeanDefinitionHolder> configCandidates = new ArrayList<>();
 		//对当前registry就是DefaultListableBeanFactory，获取所有已经注册的BeanDefinition的baneName
 		String[] candidateNames = registry.getBeanDefinitionNames();
-		//遍历所有要处理的BeanDefinition的名称
+		//遍历所有要处理的BeanDefinition的名称，筛选被注解修饰的BeanDefinition
 		for (String beanName : candidateNames) {
 			//获取指定名称的BeanDefinition对象
 			BeanDefinition beanDef = registry.getBeanDefinition(beanName);
@@ -279,7 +287,10 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 					logger.debug("Bean definition has already been processed as a configuration class: " + beanDef);
 				}
 			}
-			//判断当前BeanDefinition是否添加@Configuration注解或者其他@Bean等注解
+			//判断当亲BeanDefinition是否是一个配置类，并为BeanDe设置属性为Lite或者Full，此处设置值是为了后续进行调用
+			//如果Configuration配置proxyBeanMethods代理为true则为full
+			//如果加了@Bean，@ComponentScan，@Component，@Import，@ImportResource注解，则是指为lite
+			//如果配置类被@Order注解标注，则设置BeanDefinition的order属性值
 			else if (ConfigurationClassUtils.checkConfigurationClassCandidate(beanDef, this.metadataReaderFactory)) {
 				//添加到对应的集合对象中去
 				configCandidates.add(new BeanDefinitionHolder(beanDef, beanName));

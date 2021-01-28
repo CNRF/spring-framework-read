@@ -15,7 +15,7 @@ public class TestSpring {
 	public static void main(String[] args) {
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean.xml");
 	/*	加载xml配置文件的第二种方式
-		ClassPathResource classPathResource = new ClassPathResource("bean.xml");
+		ClassPathResource classPathResource = new ClassPathResource("processConfigBeanDefinitions.xml");
 		XmlBeanFactory xmlBeanFactory = new XmlBeanFactory(classPathResource );*/
 	/*	接口载入
 		AnnotationConfigApplicationContext annotationConfigApplicationContext = new AnnotationConfigApplicationContext(MyConfig.class);*/

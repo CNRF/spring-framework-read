@@ -1,6 +1,7 @@
 package com.king.selfbdrpp;
 
 import com.king.config.MyClassPathXmlApplicationContext;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**

@@ -121,9 +121,9 @@ abstract class ConfigurationClassUtils {
 				return false;
 			}
 		}
-		//判断当前BeanDefinition是否存在@Configuration注解
+		//获取bean定义的元数据被@Configuration注解标注的属性字典值
 		Map<String, Object> config = metadata.getAnnotationAttributes(Configuration.class.getName());
-		//判断是否同时包含proxyBeanMethods属性，是则设置configuration属性为full
+		//如果bean被@Configuration注解标注，且属性proxyBeanMethods为false(代理模式),则将bean定义为full
 		if (config != null && !Boolean.FALSE.equals(config.get("proxyBeanMethods"))) {
 			beanDef.setAttribute(CONFIGURATION_CLASS_ATTRIBUTE, CONFIGURATION_CLASS_FULL);
 		}
