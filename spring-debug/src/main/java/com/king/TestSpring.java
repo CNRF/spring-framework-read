@@ -1,4 +1,4 @@
-package com.king.Test;
+package com.king;
 
 import com.king.config.MyConfig;
 import com.king.entity.PersonA;
@@ -13,7 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class TestSpring {
 	public static void main(String[] args) {
-		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("bean.xml");
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("com/king/bean.xml");
 	/*	加载xml配置文件的第二种方式
 		ClassPathResource classPathResource = new ClassPathResource("processConfigBeanDefinitions.xml");
 		XmlBeanFactory xmlBeanFactory = new XmlBeanFactory(classPathResource );*/

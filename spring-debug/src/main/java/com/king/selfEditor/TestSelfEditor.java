@@ -11,8 +11,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class TestSelfEditor {
 	public static void main(String[] args) {
 
-		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("selfEditor.xml");
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("com/king/selfEditor/selfEditor.xml");
 		Customer bean = applicationContext.getBean(Customer.class);
 		System.out.println(bean);
+
 	}
 }

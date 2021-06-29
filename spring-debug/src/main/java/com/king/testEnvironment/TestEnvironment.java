@@ -1,4 +1,4 @@
-package com.king.Test;
+package com.king.testEnvironment;
 
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -11,7 +11,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class TestEnvironment {
 	public static void main(String[] args) {
-		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring-${username}.xml");
+		/*
+		* Git无法提交spring-${username}.xml文件
+		* 需要将文件夹中文件重命名为spring-${username}.xml
+		* */
+		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("com/king/testEnvironment/spring-${username}.xml");
 		AutowireCapableBeanFactory beanFactory = applicationContext.getAutowireCapableBeanFactory();
 		System.out.println(beanFactory);
 

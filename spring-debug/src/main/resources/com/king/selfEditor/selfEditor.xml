@@ -3,9 +3,10 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 <bean id="customer" class="com.king.selfEditor.Customer">
+<!--	 指定customer的解析器-->
 	<property name="name" value="张三"/>
-	<property name="address" value="湖北省_黄冈市_武穴市"/>
- </bean>
+	<property name="address" value="aa省_bb市_cc镇"/>
+</bean>
 	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
 		<property name="propertyEditorRegistrars">
 			<list>
