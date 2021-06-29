@@ -1,4 +1,4 @@
-package com.king.config;
+package com.king.testService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

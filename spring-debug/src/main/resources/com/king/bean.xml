@@ -11,5 +11,5 @@
 		<constructor-arg index="1" value="12"/>
 	</bean>
 <!--	新增自定义bean增强器（BeanPostProcessor）-->
-	<bean class="com.king.config.MyBeanPostProcessor"/>
+	<bean class="com.king.selfbdrpp.MyBeanPostProcessor"/>
 </beans>

@@ -1,4 +1,4 @@
-package com.king.config;
+package com.king.selfbdrpp;
 
 import com.king.entity.Person;
 import org.springframework.beans.BeansException;

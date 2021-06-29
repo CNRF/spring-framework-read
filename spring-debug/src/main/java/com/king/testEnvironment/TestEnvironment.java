@@ -7,7 +7,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author wmx
  * @version 1.0
  * @date 2020/12/16 11:06
- * @Description
+ * @Description  spring会自动将相关系统环境变量替换为相关值，故此段代码会报错，提示无spring-Administrator.xml文件
+ * 				@see org.springframework.context.support.AbstractApplicationContext#getEnvironment
+ *
  */
 public class TestEnvironment {
 	public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package com.king.config;
+package com.king.selfbdrpp;
 
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
