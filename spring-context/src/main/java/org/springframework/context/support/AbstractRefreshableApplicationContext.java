@@ -24,6 +24,7 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextException;
 import org.springframework.lang.Nullable;
+import org.springframework.util.ObjectUtils;
 
 /**
  * Base class for {@link org.springframework.context.ApplicationContext}
@@ -127,9 +128,10 @@ public abstract class AbstractRefreshableApplicationContext extends AbstractAppl
 			closeBeanFactory();
 		}
 		try {
-			//创建DefaultListableBeanFactory对象
+			//创建DefaultListableBeanFactory对象,此时的BeanFactory都是初始化的值
 			DefaultListableBeanFactory beanFactory = createBeanFactory();
 			//设置序列化的id，可以从id反序列化到BeanFactory对象
+			//此处的id值由org.springframework.context.support.AbstractApplicationContext中定义private String id = ObjectUtils.identityToString(this); 生成
 			beanFactory.setSerializationId(getId());
 			//定制Bean工厂，设置相关属性值，包括是否运行覆盖通名称的不同定义的对象以及循环依赖
 			customizeBeanFactory(beanFactory);

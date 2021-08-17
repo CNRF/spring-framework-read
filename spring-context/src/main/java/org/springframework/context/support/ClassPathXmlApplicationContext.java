@@ -82,6 +82,7 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
 	 * @throws BeansException if context creation failed
 	 */
 	public ClassPathXmlApplicationContext(String configLocation) throws BeansException {
+		//在此处会调用相同方法名的重载方法
 		this(new String[] {configLocation}, true, null);
 	}
 
@@ -137,12 +138,19 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
 	public ClassPathXmlApplicationContext(
 			String[] configLocations, boolean refresh, @Nullable ApplicationContext parent)
 			throws BeansException {
-
+		/**
+		 * 调用父类的构造方法，在此时parent为null
+		 * */
 		super(parent);
-		//设置传递的configLocations（文件名称）
-		//在此过程中判断Environment为空的情况会调用createEnvironment()方法获取相关环境数据
+		/**
+		 * 		设置传递的configLocations（文件名称）
+		 * 	在此过程中判断Environment为空的情况会调用createEnvironment()方法获取相关环境数据
+		 */
 		setConfigLocations(configLocations);
 		if (refresh) {
+			/**
+			 * 在此处调用refresh进行spring的相关处理
+			 * */
 			refresh();
 		}
 	}

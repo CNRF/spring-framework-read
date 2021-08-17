@@ -172,12 +172,19 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 				Node node = nl.item(i);
 				if (node instanceof Element) {
 					Element ele = (Element) node;
-					//判断是否为默认的命名空间（可自定义命名空间）
+					/**
+					 * 判断是否为默认的命名空间（可自定义命名空间）
+					 * 只是spring中的默认空间，不包含sprig-context等
+					 */
 					if (delegate.isDefaultNamespace(ele)) {
 						parseDefaultElement(ele, delegate);
 					}
 					else {
-						//对自定义的命名空间进行相关解析
+						/**
+						 * 对自定义默认空间进行解析
+						 * 如spring-context，spring-mvc等
+						 * 此处提供给其他地方进行拓展工作
+						 * */
 						delegate.parseCustomElement(ele);
 					}
 				}
@@ -188,6 +195,11 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 		}
 	}
 
+	/**
+	 * 此方法对spring的默认命名空间中相关数据标签进行接卸工作
+	 * @param ele
+	 * @param delegate
+	 */
 	private void parseDefaultElement(Element ele, BeanDefinitionParserDelegate delegate) {
 		if (delegate.nodeNameEquals(ele, IMPORT_ELEMENT)) {
 			importBeanDefinitionResource(ele);

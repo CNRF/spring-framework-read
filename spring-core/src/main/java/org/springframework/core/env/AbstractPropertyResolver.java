@@ -208,6 +208,7 @@ public abstract class AbstractPropertyResolver implements ConfigurablePropertyRe
 		if (this.strictHelper == null) {
 			this.strictHelper = createPlaceholderHelper(false);
 		}
+		//进行环境变量相关替换
 		return doResolvePlaceholders(text, this.strictHelper);
 	}
 
@@ -232,10 +233,18 @@ public abstract class AbstractPropertyResolver implements ConfigurablePropertyRe
 	}
 
 	private PropertyPlaceholderHelper createPlaceholderHelper(boolean ignoreUnresolvablePlaceholders) {
+		// 在此将符号${ ，}赋值到 PropertyPlaceholderHelper的方法中
 		return new PropertyPlaceholderHelper(this.placeholderPrefix, this.placeholderSuffix,
 				this.valueSeparator, ignoreUnresolvablePlaceholders);
 	}
 
+	/**
+	 *  在此处将相关text字符串中带系统变量名的进行相关替换工作
+	 *spring-${username}.xml 会被替换为 spring-admin.xml(admin为当前计算机用户名)
+	 * @param text  需要替换的字符串
+	 * @param helper  默认的符号${}
+	 * @return
+	 */
 	private String doResolvePlaceholders(String text, PropertyPlaceholderHelper helper) {
 		return helper.replacePlaceholders(text, this::getPropertyAsRawString);
 	}

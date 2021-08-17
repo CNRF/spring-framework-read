@@ -74,11 +74,14 @@ public abstract class AbstractRefreshableConfigApplicationContext extends Abstra
 	 * <p>If not set, the implementation may use a default as appropriate.
 	 */
 	public void setConfigLocations(@Nullable String... locations) {
+		//初始化相关配置文件，加载到configLocations中
 		if (locations != null) {
 			Assert.noNullElements(locations, "Config locations must not be null");
 			this.configLocations = new String[locations.length];
 			for (int i = 0; i < locations.length; i++) {
-				//当Environment为空的时候，会在此处有相关处理赋值
+				/**  当Environment为空的时候，会在resolvePath有相关处理赋值，会调用下面方法
+				 * @see org.springframework.context.support.AbstractApplicationContext#getEnvironment
+				 */
 				this.configLocations[i] = resolvePath(locations[i]).trim();
 			}
 		}
@@ -123,6 +126,10 @@ public abstract class AbstractRefreshableConfigApplicationContext extends Abstra
 	 * @see org.springframework.core.env.Environment#resolveRequiredPlaceholders(String)
 	 */
 	protected String resolvePath(String path) {
+		//在获取系统环境相关数据
+		/**
+		 * 在此处进行环境变量的获取，同时resolveRequiredPlaceholders方法会将配置文件中存在的spring-${username}.xml替换为spring-Admin.xml
+		 */
 		return getEnvironment().resolveRequiredPlaceholders(path);
 	}
 

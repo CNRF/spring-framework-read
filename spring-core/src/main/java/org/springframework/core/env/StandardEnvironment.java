@@ -75,6 +75,11 @@ public class StandardEnvironment extends AbstractEnvironment {
 	 */
 	@Override
 	protected void customizePropertySources(MutablePropertySources propertySources) {
+		/**
+		 * 会getSystemProperties进行jdk的(Map) System.getProperties()调用获取环境变量
+		 * getSystemEnvironment 进行(Map) System.getenv();调用获取变量
+		 * 此时会将当前设备的数据加载到spring的environment的属性中
+		 * */
 		propertySources.addLast(
 				new PropertiesPropertySource(SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME, getSystemProperties()));
 		propertySources.addLast(

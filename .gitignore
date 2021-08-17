@@ -42,3 +42,4 @@ test-output
 atlassian-ide-plugin.xml
 .gradletasknamecache
 /spring-debug/src/main/resources/spring-${username}.xml
+/spring-debug/src/main/resources/com/king/testEnvironment/spring-${username}.xml

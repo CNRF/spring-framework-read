@@ -3,13 +3,9 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean id="person" class="com.king.entity.Person">
-	<constructor-arg index="0" value="wmx"/>
-		<constructor-arg index="1" value="12"/>
-	</bean>
-	<bean id="personA" class="com.king.entity.PersonA">
-		<constructor-arg index="0" value="wmxA"/>
+	<constructor-arg index="0" value="张三"/>
 		<constructor-arg index="1" value="12"/>
 	</bean>
 <!--	新增自定义bean增强器（BeanPostProcessor）-->
-	<bean class="com.king.selfbdrpp.MyBeanPostProcessor"/>
+<!--	<bean class="com.king.selfbdrpp.MyBeanPostProcessor"/>-->
 </beans>

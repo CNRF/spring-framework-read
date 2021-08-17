@@ -11,6 +11,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class TestSelfApplicationContext {
 	public static void main(String[] args) {
 
-		ClassPathXmlApplicationContext applicationContext = new MyClassPathXmlApplicationContext("bean.xml");
+		ClassPathXmlApplicationContext applicationContext = new MyClassPathXmlApplicationContext("com/king/beanPostRegistryProcessor/selfBeanPostRegistryProcessor.xml");
 	}
 }

@@ -72,6 +72,10 @@ public abstract class AbstractXmlApplicationContext extends AbstractRefreshableC
 
 
 	/**
+	 *
+	 *  此处是实现将xml中的bean加载到spring容器中，会多次调用loadBeanDefinitions的重载方法
+	 *   实现从String[]---String---Resource[]----resource,最终开始讲resource读取成一个document文档，
+	 * 	根据文档的节点信息封装成一个个的BeanDefinition的对象
 	 * Loads the bean definitions via an XmlBeanDefinitionReader.
 	 * @see org.springframework.beans.factory.xml.XmlBeanDefinitionReader
 	 * @see #initBeanDefinitionReader
