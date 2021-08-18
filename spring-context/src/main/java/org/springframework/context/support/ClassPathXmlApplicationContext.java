@@ -138,17 +138,18 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
 	public ClassPathXmlApplicationContext(
 			String[] configLocations, boolean refresh, @Nullable ApplicationContext parent)
 			throws BeansException {
-		/**
-		 * 调用父类的构造方法，在此时parent为null
+		/*
+		 * 调用父类的构造方法，在此时parent为null,但是多次调用父类的构造方法的时候
+		 * 父类的相关变量也在此时进行了相关初始化的工作
 		 * */
 		super(parent);
-		/**
+		/*
 		 * 		设置传递的configLocations（文件名称）
 		 * 	在此过程中判断Environment为空的情况会调用createEnvironment()方法获取相关环境数据
 		 */
 		setConfigLocations(configLocations);
 		if (refresh) {
-			/**
+			/*
 			 * 在此处调用refresh进行spring的相关处理
 			 * */
 			refresh();

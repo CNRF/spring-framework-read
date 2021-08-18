@@ -74,7 +74,7 @@ final class PostProcessorRegistrationDelegate {
 			//存放BeanDefinitionRegistryPostProcessor集合
 			List<BeanDefinitionRegistryPostProcessor> registryProcessors = new ArrayList<>();
 
-			/**
+			/*
 			* 首先处理BeanFactoryPostProcessor，遍历所有的BeanFactoryPostProcessors
 			* 将 BeanDefinitionRegistryPostProcessor 和BeanFactoryPostProcessor  区分开
 			* */
@@ -82,7 +82,7 @@ final class PostProcessorRegistrationDelegate {
 				if (postProcessor instanceof BeanDefinitionRegistryPostProcessor) {
 					BeanDefinitionRegistryPostProcessor registryProcessor =
 							(BeanDefinitionRegistryPostProcessor) postProcessor;
-					/**直接执行BeanDefinitionRegistryPostProcessor接口中的postProcessBeanDefinitionRegistry方法
+					/*直接执行BeanDefinitionRegistryPostProcessor接口中的postProcessBeanDefinitionRegistry方法
 						在此过程中可能会添加新的postProcessBeanFactory，故后面会有重复代码对相关新增的进行处理
 					 *
 					 * */
@@ -124,14 +124,16 @@ final class PostProcessorRegistrationDelegate {
 			currentRegistryProcessors.clear();
 
 			// Next, invoke the BeanDefinitionRegistryPostProcessors that implement Ordered.
-/**			调用所有实现PriorityOrdered接口的BeanDefinitionRegistryPostProcessor实现类
+			/*调用所有实现PriorityOrdered接口的BeanDefinitionRegistryPostProcessor实现类
 			找到所有实现BeanDefinitionRegistryPostProcessor 接口的bean的beanName
 			 此处需要重复查找的原因在于可能在上面执行的过程中会新增新的BeanDefinitionRegistryPostProcessor*/
 			postProcessorNames = beanFactory.getBeanNamesForType(BeanDefinitionRegistryPostProcessor.class, true, false);
 			for (String ppName : postProcessorNames) {
 				//检测是否实现Ordered接口，并且还未被执行过
 				if (!processedBeans.contains(ppName) && beanFactory.isTypeMatch(ppName, Ordered.class)) {
-					//获取名字对应的bean实例，添加到currentRegistryProcessors中
+				/*	获取名字对应的bean实例，添加到currentRegistryProcessors中
+				* beanFactory.getBean中会进行相关相关bean的实例化工作
+				* */
 					currentRegistryProcessors.add(beanFactory.getBean(ppName, BeanDefinitionRegistryPostProcessor.class));
 					//将要执行的BFPP名称添加到processedBeans中，避免后续重复执行
 					processedBeans.add(ppName);
@@ -179,7 +181,7 @@ final class PostProcessorRegistrationDelegate {
 
 		// Do not initialize FactoryBeans here: We need to leave all regular beans
 		// uninitialized to let the bean factory post-processors apply to them!
-		/**
+		/*
 		 *	到此为止，入参beanFactoryProcessors和容器中所有的BeanDefinitionRegistryPostProcessor已经全部处理完成
 		 * 现在开始处理BeanFactoryPostProcessor
 		 * 这里可能存在一部分只实现了BeanFactoryPostProcessor,
