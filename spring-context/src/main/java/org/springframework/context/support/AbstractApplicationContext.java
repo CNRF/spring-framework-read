@@ -549,12 +549,16 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				/*
 				*5、实例化并调用所有注册的BeanFactoryPostProcessor Bean，并遵循显式顺序（如果给定的话）。
 				* 	必须在单例实例化之前调用
+				* 	在这个方法中会将 BeanFactoryPostProcessors 的相关bean进行实例化
+				*
 				* */
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
 				/*
 				* 6、注册BeanPostProcessors，这里只是注册功能，真正调用的是getBean方法
+				*   在这个方法中会将 BeanPostProcessors 的相关bean进行实例化
+				*
 				* */
 				registerBeanPostProcessors(beanFactory);
 
@@ -727,8 +731,10 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		beanFactory.addBeanPostProcessor(new ApplicationContextAwareProcessor(this));
 		/**
 		* @see ApplicationContextAwareProcessor#invokeAwareInterfaces
-		* 忽略的6个Aware方法会在invokeAwareInterfaces中进行相关实现
-		 * 在此进行忽略是因为这些接口的实现由容器通过set方法进行注入
+		 * 下面六个接口全部交给前面添加的后置处理器处理
+		 * 会给带有set+属性名的方法赋值.在populateBean(创建bean的第二步:属性赋值)时 因为下面接口都有set***方法, 这些方法不特殊处理将会自动注入到容器中.
+		 * 比如:EnvironmentAware 里面设置了一些环境变量, 这些环境变量是不需要进行属性装配的, 所以要把他们排除掉
+		 * 自动装配时忽略该接口实现类中和setter方法入参相同的类型，也就是忽略该接口实现类中存在依赖外部的bean属性注入
 		 *  @autowire 接口需要set方法，故需要set方法实现，不再beanFactory方法中实现
 		* */
 		beanFactory.ignoreDependencyInterface(EnvironmentAware.class);

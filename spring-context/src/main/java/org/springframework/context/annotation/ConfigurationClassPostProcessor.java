@@ -287,7 +287,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 					logger.debug("Bean definition has already been processed as a configuration class: " + beanDef);
 				}
 			}
-			//判断当亲BeanDefinition是否是一个配置类，并为BeanDe设置属性为Lite或者Full，此处设置值是为了后续进行调用
+			//判断当前BeanDefinition是否是一个配置类，并为BeanDe设置属性为Lite或者Full，此处设置值是为了后续进行调用
 			//如果Configuration配置proxyBeanMethods代理为true则为full
 			//如果加了@Bean，@ComponentScan，@Component，@Import，@ImportResource注解，则是指为lite
 			//如果配置类被@Order注解标注，则设置BeanDefinition的order属性值

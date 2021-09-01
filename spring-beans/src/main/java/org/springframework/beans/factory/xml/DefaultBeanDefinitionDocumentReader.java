@@ -172,15 +172,15 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 				Node node = nl.item(i);
 				if (node instanceof Element) {
 					Element ele = (Element) node;
-					/**
+					/*
 					 * 判断是否为默认的命名空间（可自定义命名空间）
-					 * 只是spring中的默认空间，不包含sprig-context等
+					 * 只是spring中的默认空间spring-bean等，不包含sprig-context等
 					 */
 					if (delegate.isDefaultNamespace(ele)) {
 						parseDefaultElement(ele, delegate);
 					}
 					else {
-						/**
+						/*
 						 * 对自定义默认空间进行解析
 						 * 如spring-context，spring-mvc等
 						 * 此处提供给其他地方进行拓展工作

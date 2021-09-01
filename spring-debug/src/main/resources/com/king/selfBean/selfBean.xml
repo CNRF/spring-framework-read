@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--	测试注入方式-->
+	<bean id="person" class="com.king.entity.Person" autowire="byName">
+		<property name="age" value="11"></property>
+		<property name="name" value="张三"></property>
+	</bean>
+	<bean id="person1" class="com.king.entity.Person" autowire="byType" scope="prototype">
+		<constructor-arg index="0" value="lisi"></constructor-arg>
+		<constructor-arg index="1" value="12"></constructor-arg>
+	</bean>
+</beans>

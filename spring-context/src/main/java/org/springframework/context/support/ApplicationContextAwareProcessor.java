@@ -104,6 +104,11 @@ class ApplicationContextAwareProcessor implements BeanPostProcessor {
 	}
 
 	private void invokeAwareInterfaces(Object bean) {
+		/**
+		 *  在此进行生成，同时BeanFactory中ignoreDependencyInterface相关接口是实现的Aware
+		 *  保证相关的bean是由spring指定的容器生成，而不是依赖beanFactory容器中相关依赖
+		 *
+		 * */
 		if (bean instanceof EnvironmentAware) {
 			((EnvironmentAware) bean).setEnvironment(this.applicationContext.getEnvironment());
 		}
