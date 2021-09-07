@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author wmx
  * @version 1.0
  * @date 2020/12/16 15:03
- * @Description
+ * @Description  扩展ClassPathXmlApplicationContext功能
  */
 public class MyClassPathXmlApplicationContext  extends ClassPathXmlApplicationContext {
 	//拓展initPropertySource测试
