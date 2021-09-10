@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.springframework.context.annotation.ConfigurationClassPostProcessor</OriginalElement>
+  <nodes>
+    <node x="990.0" y="0.0">java.lang.FunctionalInterface</node>
+    <node x="747.0" y="81.0">org.springframework.core.Ordered</node>
+    <node x="409.8552631578947" y="243.0">org.springframework.context.annotation.ConfigurationClassPostProcessor</node>
+    <node x="0.0" y="162.0">org.springframework.context.EnvironmentAware</node>
+    <node x="967.5" y="81.0">org.springframework.beans.factory.config.BeanFactoryPostProcessor</node>
+    <node x="216.0" y="162.0">org.springframework.context.ResourceLoaderAware</node>
+    <node x="279.0" y="81.0">org.springframework.beans.factory.Aware</node>
+    <node x="711.0" y="162.0">org.springframework.core.PriorityOrdered</node>
+    <node x="459.0" y="162.0">org.springframework.beans.factory.BeanClassLoaderAware</node>
+    <node x="918.0" y="162.0">org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.springframework.context.EnvironmentAware" target="org.springframework.beans.factory.Aware" relationship="INTERFACE_GENERALIZATION">
+      <point x="0.0" y="-15.5" />
+      <point x="98.0" y="137.0" />
+      <point x="327.5" y="137.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.springframework.context.annotation.ConfigurationClassPostProcessor" target="org.springframework.beans.factory.BeanClassLoaderAware" relationship="REALIZATION">
+      <point x="0.0" y="-15.5" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor" target="org.springframework.beans.factory.config.BeanFactoryPostProcessor" relationship="INTERFACE_GENERALIZATION">
+      <point x="0.0" y="-15.5" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.springframework.context.annotation.ConfigurationClassPostProcessor" target="org.springframework.core.PriorityOrdered" relationship="REALIZATION">
+      <point x="66.20000000000005" y="-15.5" />
+      <point x="641.5552631578947" y="213.0" />
+      <point x="804.5" y="213.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.springframework.context.ResourceLoaderAware" target="org.springframework.beans.factory.Aware" relationship="INTERFACE_GENERALIZATION">
+      <point x="0.0" y="-15.5" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.springframework.context.annotation.ConfigurationClassPostProcessor" target="org.springframework.context.ResourceLoaderAware" relationship="REALIZATION">
+      <point x="-66.19999999999993" y="-15.5" />
+      <point x="509.15526315789475" y="213.0" />
+      <point x="327.5" y="213.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.springframework.context.annotation.ConfigurationClassPostProcessor" target="org.springframework.context.EnvironmentAware" relationship="REALIZATION">
+      <point x="-132.39999999999998" y="-15.5" />
+      <point x="442.9552631578947" y="223.0" />
+      <point x="98.0" y="223.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.springframework.context.annotation.ConfigurationClassPostProcessor" target="org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor" relationship="REALIZATION">
+      <point x="132.39999999999998" y="-15.5" />
+      <point x="707.7552631578947" y="223.0" />
+      <point x="1101.5" y="223.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.springframework.core.PriorityOrdered" target="org.springframework.core.Ordered" relationship="INTERFACE_GENERALIZATION">
+      <point x="0.0" y="-15.5" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.springframework.beans.factory.BeanClassLoaderAware" target="org.springframework.beans.factory.Aware" relationship="INTERFACE_GENERALIZATION">
+      <point x="0.0" y="-15.5" />
+      <point x="575.0" y="137.0" />
+      <point x="327.5" y="137.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.springframework.beans.factory.config.BeanFactoryPostProcessor" target="java.lang.FunctionalInterface" relationship="ANNOTATION">
+      <point x="0.0" y="-15.5" />
+      <point x="0.0" y="15.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.3379310344827584" showDependencies="false" x="772.0710964225652" y="266.3198695519544" />
+  <SelectedNodes>
+    <node>org.springframework.context.annotation.ConfigurationClassPostProcessor</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
