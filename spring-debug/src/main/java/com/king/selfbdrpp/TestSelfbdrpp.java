@@ -2,6 +2,8 @@ package com.king.selfbdrpp;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.Arrays;
+
 /**
  * @author wmx
  * @version 1.0
@@ -11,6 +13,5 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class TestSelfbdrpp {
 	public static void main(String[] args) {
 		ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("com/king/beanPostRegistryProcessor/selfBeanPostRegistryProcessor.xml");
-
 	}
 }

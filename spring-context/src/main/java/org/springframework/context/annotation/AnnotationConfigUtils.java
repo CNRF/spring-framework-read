@@ -159,7 +159,9 @@ public abstract class AnnotationConfigUtils {
 		}
 
 		Set<BeanDefinitionHolder> beanDefs = new LinkedHashSet<>(8);
-
+  //注册BeanDefinition，   CONFIGURATION_ANNOTATION_PROCESSOR_BEAN_NAME（org.springframework.context.annotation.internalConfigurationAnnotationProcessor）
+		// 和ConfigurationClassPostProcessor.class方法进行对应
+		//下面几个的逻辑与此相同，因此在invokeBeanFactoryPostProcessors中才会去调用ConfigurationClassPostProcessor方法
 		if (!registry.containsBeanDefinition(CONFIGURATION_ANNOTATION_PROCESSOR_BEAN_NAME)) {
 			RootBeanDefinition def = new RootBeanDefinition(ConfigurationClassPostProcessor.class);
 			def.setSource(source);
