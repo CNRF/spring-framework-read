@@ -72,6 +72,7 @@ public abstract class NamespaceHandlerSupport implements NamespaceHandler {
 	public BeanDefinition parse(Element element, ParserContext parserContext) {
 		//获取元素的解析器
 		BeanDefinitionParser parser = findParserForElement(element, parserContext);
+		//此处parser.parse当时自定义命名空间数据，将调用ConfigBeanDefinitionParser中方法将相关的internal XXX方法添加到BD中
 		return (parser != null ? parser.parse(element, parserContext) : null);
 	}
 

@@ -262,12 +262,21 @@ public abstract class BeanFactoryUtils {
 			ListableBeanFactory lbf, Class<?> type, boolean includeNonSingletons, boolean allowEagerInit) {
 
 		Assert.notNull(lbf, "ListableBeanFactory must not be null");
+		//获取与Type（包括子类）匹配的bean的名称，根据includeNonSingletons来决定是否包含原型+单例还是单例
+		//根据allowEagerInit决定是否初始化lazy-init单例和由FactoryBeans创建的对象以进行类型检测
 		String[] result = lbf.getBeanNamesForType(type, includeNonSingletons, allowEagerInit);
+		//HierarchicalBeanFactory是提供父容器的访问功能
 		if (lbf instanceof HierarchicalBeanFactory) {
 			HierarchicalBeanFactory hbf = (HierarchicalBeanFactory) lbf;
+			// ListableBeanFactory：扩展BeanFactory使其支持迭代Ioc容器持有的Bean对象。注意如果
+			// ListableBeanFactory同时也是HierarchicalBeanFactory，那么大多数情况下，
+			// 只迭代当前Ioc容器持有的Bean对象，不会在体系结构中想父级递归迭代
+			// 如果hbf的父工厂是ListableBeanFactory对象
 			if (hbf.getParentBeanFactory() instanceof ListableBeanFactory) {
+			// 递归该方法获取父工厂里type的所有bean名,包括父级工厂中定义的名称
 				String[] parentResult = beanNamesForTypeIncludingAncestors(
 						(ListableBeanFactory) hbf.getParentBeanFactory(), type, includeNonSingletons, allowEagerInit);
+				// 将result结果与parentResult合并
 				result = mergeNamesWithParent(result, parentResult, hbf);
 			}
 		}

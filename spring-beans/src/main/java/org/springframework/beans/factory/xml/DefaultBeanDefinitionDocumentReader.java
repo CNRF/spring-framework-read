@@ -182,7 +182,7 @@ public class DefaultBeanDefinitionDocumentReader implements BeanDefinitionDocume
 					else {
 						/*
 						 * 对自定义默认空间进行解析
-						 * 如spring-context，spring-mvc等
+						 * 如spring-context，spring-mvc等会在此处将一些框架内部需要实例化的bean进行BeanDefinition的注册
 						 * 此处提供给其他地方进行拓展工作
 						 * */
 						delegate.parseCustomElement(ele);
