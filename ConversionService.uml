@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.springframework.core.convert.ConversionService</OriginalElement>
+  <nodes>
+    <node x="58.5" y="81.0">org.springframework.core.convert.support.ConfigurableConversionService</node>
+    <node x="225.0" y="0.0">org.springframework.core.convert.converter.ConverterRegistry</node>
+    <node x="81.0" y="162.0">org.springframework.core.convert.support.GenericConversionService</node>
+    <node x="0.0" y="0.0">org.springframework.core.convert.ConversionService</node>
+    <node x="81.0" y="243.0">org.springframework.core.convert.support.DefaultConversionService</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.springframework.core.convert.support.ConfigurableConversionService" target="org.springframework.core.convert.converter.ConverterRegistry" relationship="INTERFACE_GENERALIZATION">
+      <point x="78.25" y="-15.5" />
+      <point x="293.25" y="56.0" />
+      <point x="327.5" y="56.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.springframework.core.convert.support.ConfigurableConversionService" target="org.springframework.core.convert.ConversionService" relationship="INTERFACE_GENERALIZATION">
+      <point x="-78.25" y="-15.5" />
+      <point x="136.75" y="56.0" />
+      <point x="102.5" y="56.0" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.springframework.core.convert.support.GenericConversionService" target="org.springframework.core.convert.support.ConfigurableConversionService" relationship="REALIZATION">
+      <point x="0.0" y="-15.5" />
+      <point x="0.0" y="15.5" />
+    </edge>
+    <edge source="org.springframework.core.convert.support.DefaultConversionService" target="org.springframework.core.convert.support.GenericConversionService" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.5" />
+      <point x="0.0" y="15.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="false" x="85.5" y="7.5" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
