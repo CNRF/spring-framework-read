@@ -501,7 +501,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		}
 
 		// Prepare method overrides.
-		//验证及准备覆盖的方法，look-method,replace-method，
+		//验证及准备覆盖的方法，look-method,replace-method()
 		// 需要创建的bean对象中包含了lookup-method和replace-method标签的时候，会产生覆盖操作
 		try {
 			mbdToUse.prepareMethodOverrides();
@@ -607,6 +607,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 						"' to allow for resolving potential circular references");
 			}
 			// 为避免后期循环依赖，可以在bean初始化完成前将创建实例的ObjectFactory加入工厂
+			// 如果其他的bean依赖该bean，直接从缓存中获取对应的工厂创建集合，解决循环依赖，注意是只有单例情况才能这么做
 			addSingletonFactory(beanName, () -> getEarlyBeanReference(beanName, mbd, bean));
 		}
 
@@ -1147,8 +1148,10 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			if (!mbd.isSynthetic() && hasInstantiationAwareBeanPostProcessors()) {
 				Class<?> targetType = determineTargetType(beanName, mbd);
 				if (targetType != null) {
+					// bean 的前置处理器
 					bean = applyBeanPostProcessorsBeforeInstantiation(targetType, beanName);
 					if (bean != null) {
+						// bean 的后置处理器
 						bean = applyBeanPostProcessorsAfterInitialization(bean, beanName);
 					}
 				}
@@ -1557,7 +1560,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		}
 
 		if (pvs != null) {
-			//应用给定的属性值，解决任何在这个bean工厂运行时其他bean的引用。必须使用深拷贝，所以我们 不会永久地修改这个属性
+			//应用给定的属性值，解决任何在这个bean工厂运行时其他bean的引用。必须使用深拷贝
+			//在此过程中会调用convertIfNecessary 对自定义的PropertyEditor和conversionService进行解析，将对应属性进行预设规则解析
 			applyPropertyValues(beanName, mbd, bw, pvs);
 		}
 	}
@@ -1960,6 +1964,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 		}
 		if (mbd == null || !mbd.isSynthetic()) {
 			// 将BeanPostProcessors应用到给定的现有Bean实例，调用它们的postProcessBeforeInitialization初始化方法。
+			//执行后置处理器 applyBeanPostProcessorsAfterInitialization
 			// 返回的Bean实例可能是原始Bean包装器
 			wrappedBean = applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
 		}

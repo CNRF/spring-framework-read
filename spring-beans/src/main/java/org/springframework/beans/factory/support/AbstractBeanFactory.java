@@ -1796,6 +1796,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	 * @param beanName the name of the bean
 	 */
 	protected void markBeanAsCreated(String beanName) {
+		//将相关的BeanName添加到alreadyCreated集合中
 		if (!this.alreadyCreated.contains(beanName)) {
 			synchronized (this.mergedBeanDefinitions) {
 				if (!this.alreadyCreated.contains(beanName)) {
