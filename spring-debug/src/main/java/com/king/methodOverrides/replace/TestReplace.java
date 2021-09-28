@@ -15,8 +15,8 @@ public class TestReplace {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("com/king/methodOverrides/replace.xml");
 		OriginalDog originalDog = (OriginalDog)ac.getBean("OriginalDog");
 		originalDog.sayHello();
-		//此处会将xml配置的sayHello()方法替换为实现MethodReplacer的方法中的reimplement实现进行替代
+		//replace标签会将xml配置的sayHello()方法替换为 ReplaceDog中 reimplement方法
 		OriginalDog originalDog1 = (OriginalDog)ac.getBean("OriginalDog1");
-		originalDog1.sayHello();
+		originalDog1.sayHello("replace");
 	}
 }
