@@ -17,6 +17,6 @@ public class TestReplace {
 		originalDog.sayHello();
 		//replace标签会将xml配置的sayHello()方法替换为 ReplaceDog中 reimplement方法
 		OriginalDog originalDog1 = (OriginalDog)ac.getBean("OriginalDog1");
-		originalDog1.sayHello("replace");
+		originalDog1.sayHello();
 	}
 }
