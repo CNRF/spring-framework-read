@@ -19,16 +19,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class TestMethodOverride {
 	public static void main(String[] args) {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("com/king/methodOverrides/methodOverride.xml");
+		//验证单例模式引用原型模式下中原型模式的Bean是否是同一个
 		Apple bean = ac.getBean(Apple.class);
 		System.out.println(bean.getBanana());
 		Apple bean2 = ac.getBean(Apple.class);
 		System.out.println(bean2.getBanana());
-		//验证获取到的原型对象是否是同一个
-		FruitPlate fruitplate1 = (FruitPlate) ac.getBean("fruitPlate1");
-		fruitplate1.getFruit();
-		FruitPlate fruitplate2 = (FruitPlate) ac.getBean("fruitPlate1");
-		fruitplate2.getFruit();
-		FruitPlate fruitplate3 = (FruitPlate) ac.getBean("fruitPlate2");
-		fruitplate3.getFruit();
 	}
 }

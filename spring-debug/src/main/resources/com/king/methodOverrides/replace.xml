@@ -2,11 +2,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	<bean id="ReplaceDog" class="com.king.methodOverrides.replace.ReplaceDog">
+	<bean id="replaceDog" class="com.king.methodOverrides.replace.ReplaceDog">
 
 	</bean>
-	<bean id="OriginalDog" class="com.king.methodOverrides.replace.OriginalDog"></bean>
-	<bean id="OriginalDog1" class="com.king.methodOverrides.replace.OriginalDog">
-		<replaced-method name="sayHello" replacer="ReplaceDog"></replaced-method>
+	<bean id="originalDog" class="com.king.methodOverrides.replace.OriginalDog"/>
+	<bean id="originalDog1" class="com.king.methodOverrides.replace.OriginalDog">
+		<replaced-method name="sayHello" replacer="replaceDog"/>
 	</bean>
 </beans>
