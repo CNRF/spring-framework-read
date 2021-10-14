@@ -24,5 +24,15 @@ public class TestMethodOverride {
 		System.out.println(bean.getBanana());
 		Apple bean2 = ac.getBean(Apple.class);
 		System.out.println(bean2.getBanana());
+
+
+		FruitPlate fruitplate1 = (FruitPlate) ac.getBean("fruitplate1");
+		fruitplate1.getFruit();
+		FruitPlate fruitplate2 = (FruitPlate) ac.getBean("fruitplate1");
+		fruitplate2.getFruit();
+		FruitPlate fruitplate3 = (FruitPlate) ac.getBean("fruitplate2");
+		fruitplate3.getFruit();
+		FruitPlate fruitplate4 = (FruitPlate) ac.getBean("fruitplate2");
+		fruitplate4.getFruit();
 	}
 }

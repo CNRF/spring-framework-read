@@ -16,9 +16,6 @@
 
 package org.springframework.aop.config;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator;
 import org.springframework.aop.aspectj.autoproxy.AspectJAwareAdvisorAutoProxyCreator;
 import org.springframework.aop.framework.autoproxy.InfrastructureAdvisorAutoProxyCreator;
@@ -28,6 +25,9 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.core.Ordered;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Utility class for handling registration of AOP auto-proxy creators.
@@ -93,6 +93,14 @@ public abstract class AopConfigUtils {
 		return registerAspectJAnnotationAutoProxyCreatorIfNecessary(registry, null);
 	}
 
+	/**
+	 * 此方法中会将AOP中beanName为org.springframework.aop.config.internalAutoProxyCreator的bean的
+	 * 类型对应到@{link org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator }
+	 *
+	 * @param registry
+	 * @param source
+	 * @return
+	 */
 	@Nullable
 	public static BeanDefinition registerAspectJAnnotationAutoProxyCreatorIfNecessary(
 			BeanDefinitionRegistry registry, @Nullable Object source) {

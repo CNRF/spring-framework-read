@@ -16,11 +16,6 @@
 
 package org.springframework.beans.factory.xml;
 
-import java.io.StringReader;
-
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-
 import org.springframework.beans.factory.BeanDefinitionStoreException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.parsing.ProblemReporter;
@@ -32,6 +27,10 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.lang.Nullable;
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+
+import java.io.StringReader;
 
 /**
  * Extension of {@link org.springframework.beans.factory.parsing.ReaderContext},
@@ -136,8 +135,11 @@ public class XmlReaderContext extends ReaderContext {
 	}
 
 	/**
+	 * 此处会调用generateBeanName方法将具有相同名称的beanDefinition进行添加 #1类似的编号已进行区分
+	 * Aop中aop:pointcut标签下的around，before等子标签都会生成#{@link org.springframework.aop.aspectj.AspectJPointcutAdvisor}类型数据，此时会通过后缀进行区分
 	 * Call the bean name generator for the given bean definition
 	 * and register the bean definition under the generated name.
+	 *
 	 * @see XmlBeanDefinitionReader#getBeanNameGenerator()
 	 * @see org.springframework.beans.factory.support.BeanNameGenerator#generateBeanName
 	 * @see BeanDefinitionRegistry#registerBeanDefinition
