@@ -45,3 +45,4 @@ atlassian-ide-plugin.xml
 /spring-debug/src/main/resources/com/king/testEnvironment/spring-${username}.xml
 /spring-debug/src/main/java/proxy/
 /spring-debug/src/main/java/com/king/aop/proxy/
+/spring-debug/src/main/java/com/king/transaction/proxy/
