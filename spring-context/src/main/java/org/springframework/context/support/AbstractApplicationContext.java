@@ -555,20 +555,20 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 
 				// Check for listener beans and register them.
 				/*
-				* 10、在所有注册的bean中查找listener bean,注册到消息广播器中
-				* */
+				 * 10、在所有注册的bean中查找listener bean,注册到消息广播器中
+				 * */
 				registerListeners();
 
 				// Instantiate all remaining (non-lazy-init) singletons.
 				/*
-				* 11、初始化剩下的单实例（非懒加载的）
-				* */
+				 * 11、初始化剩下的单实例（非懒加载的）
+				 * */
 				finishBeanFactoryInitialization(beanFactory);
 
 				// Last step: publish corresponding event.
 				/*
-				* 12、完成刷新过程，通知生命周期处理器lifecycleProcessor刷新过程，同时发出ContextRefreshEvent通知
-				* */
+				 * 12、完成刷新过程，通知生命周期处理器lifecycleProcessor刷新过程，同时发出ContextRefreshEvent通知
+				 * */
 				finishRefresh();
 			}
 

@@ -1103,7 +1103,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			if (!mbd.isSynthetic() && hasInstantiationAwareBeanPostProcessors()) {
 				Class<?> targetType = determineTargetType(beanName, mbd);
 				if (targetType != null) {
-					// bean 的前置处理器
+					// bean 的前置处理器,此处如果存在AOP（包含事务）的时候，第一次会将相关AOP bean创建好
 					bean = applyBeanPostProcessorsBeforeInstantiation(targetType, beanName);
 					if (bean != null) {
 						// bean 的后置处理器
